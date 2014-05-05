@@ -42,9 +42,17 @@ function output_describe_at() {
 	cd $PWD_
 }
 
-function output_repo_url() {
+function output_repo_url_raw() {
+	PWD_=$PWD
+	cd $cfg_path_git
 	git remote -v | egrep "^origin" | head -n 1 | sed -e 's/.*\(http[a-zA-Z.:/\+-]*\).*/\1/g'
 	# there is probably much easier way and this is really silly...
+	cd $PWD_
+}
+
+function output_repo_url() {
+	name=$(output_repo_url_raw)
+	echo "$name" | sed -e 's/http[s]*:\/\///g'
 }
 
 if [[ "$ver_old" != "$ver_now" ]] 
@@ -60,22 +68,19 @@ then
 	git_name=$( output_repo_url )
 	echo "git_name=$git_name"
 
-echo "1"
 	echo "" > "$path_now/log.txt"
-echo "2"
 	echo "Reporting update in GIT repository $git_name" >> "$path_now/log.txt"
-echo "3"
 	echo "" > "$path_now/log.txt"
-echo "4"
 	output_describe_at $ver_now >> "$path_now/log.txt"
-echo "5"
 	output_log_between_versions $ver_old $ver_now >> "$path_now/log.txt"
 
 	echo "Message:"
 	cat "$path_now/log.txt"
 
+	title="[git] $git_name ${ver_now:0:10}"
+
 	allok=1
-	./notify.sh "[git] ver $ver_now" "$path_now/log.txt" || {
+	./notify.sh "$title" "[git] ver $ver_now" "$path_now/log.txt" || {
 		echo "Notify failed!"
 		allok=0
 	}
