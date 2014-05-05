@@ -7,6 +7,7 @@ cfg_path_info="var/$cfg_project/info"
 PWD_=$PWD
 	cd $cfg_path_git
 	git pull
+	git pull --tags
 	ver_now=$(git log | head -n 1 | cut -d" " -f2)
 cd $PWD_
 

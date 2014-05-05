@@ -3,6 +3,6 @@ do
 		./cron.sh
 
 		echo "Sleeping"
-		sleep 10
+		sleep 60
 		echo "Wake up"
 done
