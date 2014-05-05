@@ -7,7 +7,7 @@ cfg_path_info="var/$cfg_project/info"
 PWD_=$PWD
 	cd $cfg_path_git
 	git pull
-	git pull --tags
+	git fetch --tags
 	ver_now=$(git log | head -n 1 | cut -d" " -f2)
 cd $PWD_
 
@@ -71,7 +71,7 @@ then
 
 	echo "" > "$path_now/log.txt"
 	echo "Reporting update in GIT repository $git_name" >> "$path_now/log.txt"
-	echo "" > "$path_now/log.txt"
+	echo "" >> "$path_now/log.txt"
 	output_describe_at $ver_now >> "$path_now/log.txt"
 	output_log_between_versions $ver_old $ver_now >> "$path_now/log.txt"
 
@@ -81,7 +81,7 @@ then
 	title="[git] $git_name ${ver_now:0:10}"
 
 	allok=1
-	./notify.sh "$title" "[git] ver $ver_now" "$path_now/log.txt" || {
+	./notify.sh "$title" "$path_now/log.txt" || {
 		echo "Notify failed!"
 		allok=0
 	}

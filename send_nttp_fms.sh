@@ -12,6 +12,10 @@ function writedata() {
 	groups="$groups,mempo"
 	#groups="$groups,linux,security,privacy,boards,sites"
 
+	echo "subject: $subject" >&2
+	echo "msg_file: $msg_file" >&2
+	echo "groups: $groups" >&2
+
 	if [ ! -r $msg_file ] 
 	then
 		die "Can not read msg_file [$msg_file]"
@@ -28,6 +32,7 @@ function writedata() {
 	printf -- '%s\n' "#mempo on freenode, oftc, irc2p | mempo.org"
 	printf -- '%s\n' "USK@CHC7Mv5yuWGQFLfh50VugNHhSpOe6OLWJiiW9XGC2Z0,m~cCrcXMEaMNTrohcxshKuYvlVzcqbKG6JdiAA1sC6M,AQACAAE/BotMempo/-1/"
 }
+
 
 writedata "$1" "$2" | postnews -v -p 1128  localhost
 
