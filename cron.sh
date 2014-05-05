@@ -6,6 +6,7 @@ cfg_path_info="var/$cfg_project/info"
 
 PWD_=$PWD
 	cd $cfg_path_git
+	git pull
 	ver_now=$(git log | head -n 1 | cut -d" " -f2)
 cd $PWD_
 
@@ -35,10 +36,9 @@ function output_describe_at() {
 	PWD_=$PWD
 	cd $cfg_path_git
 	git remote -v | head -n 1
-	echo ""
 	git describe $1
 	git describe --long $1
-	git tag -v `git describe $1` 2>&1
+	git tag -v `git describe $1` 2>&1 || :
 	cd $PWD_
 }
 
@@ -58,11 +58,17 @@ then
 	echo "Working on reporting event $path_now" > "$path_now/log.txt"
 
 	git_name=$( output_repo_url )
+	echo "git_name=$git_name"
 
+echo "1"
 	echo "" > "$path_now/log.txt"
+echo "2"
 	echo "Reporting update in GIT repository $git_name" >> "$path_now/log.txt"
+echo "3"
 	echo "" > "$path_now/log.txt"
+echo "4"
 	output_describe_at $ver_now >> "$path_now/log.txt"
+echo "5"
 	output_log_between_versions $ver_old $ver_now >> "$path_now/log.txt"
 
 	echo "Message:"
