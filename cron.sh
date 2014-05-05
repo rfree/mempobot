@@ -42,6 +42,11 @@ function output_describe_at() {
 	cd $PWD_
 }
 
+function output_repo_url() {
+	git remote -v | egrep "^origin" | head -n 1 | sed -e 's/.*\(http[a-zA-Z.:/\+-]*\).*/\1/g'
+	# there is probably much easier way and this is really silly...
+}
+
 if [[ "$ver_old" != "$ver_now" ]] 
 then
 
@@ -52,8 +57,11 @@ then
 	echo "Working on reporting event $path_now"
 	echo "Working on reporting event $path_now" > "$path_now/log.txt"
 
+	git_name=$( output_repo_url )
+
 	echo "" > "$path_now/log.txt"
-	echo "Reporting update in GIT repository." >> "$path_now/log.txt"
+	echo "Reporting update in GIT repository $git_name" >> "$path_now/log.txt"
+	echo "" > "$path_now/log.txt"
 	output_describe_at $ver_now >> "$path_now/log.txt"
 	output_log_between_versions $ver_old $ver_now >> "$path_now/log.txt"
 
@@ -61,7 +69,7 @@ then
 	cat "$path_now/log.txt"
 
 	allok=1
-	./notify.sh "Git update to $ver_now" "$path_now/log.txt" || {
+	./notify.sh "[git] ver $ver_now" "$path_now/log.txt" || {
 		echo "Notify failed!"
 		allok=0
 	}
