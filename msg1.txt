@@ -1,0 +1,28 @@
+Hello
+
+as seen on my new freesite:
+USK@CHC7Mv5yuWGQFLfh50VugNHhSpOe6OLWJiiW9XGC2Z0,m~cCrcXMEaMNTrohcxshKuYvlVzcqbKG6JdiAA1sC6M,AQACAAE/BotMempo/1/
+
+this is announcement of new boards (and freesite) related to secure linux Mempo:
+
+* mempo - Mempo Project – Hardened Privacy (Secure Linux)
+* mempo.bot - Mempo Hardened Privacy: verbose details by bot
+* linux - Linux operating system
+
+This bot here will post to this boards automatic notifications.
+
+* when Mempo Secure SameKernel for Debian is released in new version
+* when Mempo Secure SameKernel for Debian publishes the expected checksum of .deb of kernel (so you can double check)
+* (detail) all git commits related to that
+* (detail) build process start/stop 
+
+Information (detail) will be posted probably only to FMS board mempo.bot to avoid clutter.
+
+Please subscribe this boards, they should be visible in FMS.
+And please try out Mempo.
+
+With regards,
+Mempo team
+
+For freedom and privacy.
+
