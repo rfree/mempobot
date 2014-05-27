@@ -3,7 +3,25 @@
 cfg_project="deterministic-kernel"
 cfg_path_git="var/$cfg_project/$cfg_project"
 cfg_path_info="var/$cfg_project/info"
+cfg_file_verold="$cfg_path_info/lastversion"
 
+if [[ ! -d "$cfg_path_git" ]] ; then # does the dir exist with checked out git
+	echo "Can not enter $cfg_path_git"
+	echo "You need to configure this program:"
+	echo "Create that directory by (mkdir -p var/..) and by checking out there the git source code of the project to be monitored"
+	echo "And then try again. Questions: #mempo on i2p or oftc or freenode (and wait up to 48 hours)"
+	exit 1
+fi;
+
+if [[ ! -r "$cfg_file_verold" ]] ; then # read old version
+	echo "Can not read the old version variable from $cfg_file_verold"
+	echo "You should write the current version (the version from which to start monitoring) as the sha string of full git version, as a text file, "
+	echo "in one line of text, to file $cfg_file_verold"
+	echo "And then try again. Questions: #mempo on i2p or oftc or freenode (and wait up to 48 hours)"
+	exit 1
+fi
+
+echo "Updating git sources from network in $cfg_path_git"
 PWD_=$PWD
 	cd $cfg_path_git
 	git pull
@@ -14,14 +32,12 @@ cd $PWD_
 sep1a="----v----v----v----"
 sep1b="----^----^----^----"
 
-echo "Version now: $ver_now"
+echo "Version now: $ver_now (from git)"
 
 mkdir -p "$cfg_path_info"
-file $cfg_path_info
 
-ver_old=$(cat $cfg_path_info/lastversion)
-echo "ver_old=$var_old"
-
+ver_old=$(cat "$cfg_file_verold")
+echo "ver_old=$ver_old (loaded from $cfg_file_verold)"
 
 function output_log_between_versions() {
 	PWD_=$PWD
@@ -94,9 +110,11 @@ then
 	fi
 
 
+	echo "Saving current version"
 	echo "$ver_now" > "$cfg_path_info/lastversion"
 	echo "Now last version is:"
 	cat "$cfg_path_info/lastversion"
-
+else
+	echo "Same versions, nothing to do"
 fi
 
