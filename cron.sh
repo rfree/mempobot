@@ -1,9 +1,19 @@
 #!/bin/bash -e
+# this will check for new versions and run notifications if needed
+# -~- mempo.org -~-
 
-cfg_project="deterministic-kernel"
-cfg_path_git="var/$cfg_project/$cfg_project"
-cfg_path_info="var/$cfg_project/info"
-cfg_file_verold="$cfg_path_info/lastversion"
+# var/PROJ/mempo/deterministic-kernel/deterministic-kernel/deterministic-kernel = git sources 
+# var/PROJ/mempo/deterministic-kernel/deterministic-kernel/info/ = dir with info
+
+arg_project_dir=$1 # mempo/deterministic-kernel
+arg_project_name=$2 # deterministic-kernel (the subdir with source code, usually the name from git clone)
+arg_project_title=$3 # mempo:kernel:OFFICIAL mempo:kernel:rfree
+
+# TODO assert $arg_project_dir does not end in / and is dir
+
+cfg_path_git="var/PROJ/$arg_project_dir/$arg_project_name"
+cfg_path_info="var/PROJ/$arg_project_dir/info"
+cfg_file_verold="$cfg_path_info/lastversion" 
 
 if [[ ! -d "$cfg_path_git" ]] ; then # does the dir exist with checked out git
 	echo "Can not enter $cfg_path_git"
@@ -94,7 +104,7 @@ then
 	echo "Message:"
 	cat "$path_now/log.txt"
 
-	title="[git] $git_name ${ver_now:0:10}"
+	title="[git] $arg_project_title ${ver_now:0:16} $git_name"
 
 	allok=1
 	./notify.sh "$title" "$path_now/log.txt" || {
