@@ -1,4 +1,6 @@
 #!/bin/bash -e
+#usage:
+# ... "subject" "message_file.txt"
 
 function die() {
 		printf -- '%s\n' "ERROR: $*"
