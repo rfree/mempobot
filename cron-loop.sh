@@ -7,13 +7,12 @@ NC='\e[0m' # No Color
 
 # Exaple of file projects.list
 # mempo/deterministic-kernel deterministic-kernel mempo:kernel:OFFICIAL test.sh 
-config_file="projects.list" 
-
+nconfig_file="projects.list" 
 if [[ ! -r "$config_file" ]] ; then 
 	echo -e "${light_red}Can not find config file: $config_file ${NC}"
 	exit 1
 fi;
-
+config_file=$(cat $nconfig_file | sed '/^$/d' | sed  '/^#/ d')
 
 while true ;
 do

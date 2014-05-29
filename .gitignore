@@ -1,5 +1,7 @@
 var
-nohup.out 
-bin 
-*~ 
-test
+nohup.out
+bin
+*~
+test*
+projects.list
+irc.conf
