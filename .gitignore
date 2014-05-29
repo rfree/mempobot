@@ -1,2 +1,5 @@
 var
-nohup.out
+nohup.out 
+bin 
+*~ 
+test
