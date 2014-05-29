@@ -17,7 +17,7 @@ arg_project_name=$2 # deterministic-kernel (the subdir with source code, usually
 arg_project_title=$3 # mempo:kernel:OFFICIAL mempo:kernel:rfree
 arg_project_afterUpdateScript=$4 
 
-after_update_script="bin/"$arg_project_afterUpdateScript
+after_update_script=$arg_project_afterUpdateScript
 
 # TODO assert $arg_project_dir does not end in / and is dir
 
@@ -100,7 +100,7 @@ function after_update() {
 		echo -e "${yellow}Can not run $arg_project_afterUpdateScript ${NC}"
 	else 
 		echo -e "${light_blue}Starting $after_update_script ${NC}"
-		bash $after_update_script
+		bash $after_update_script 
 	fi
 
 }

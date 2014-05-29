@@ -2,17 +2,20 @@
 
 # colours
 light_red='\e[1;31m' 
-light_green='\e[1;32m'
+light_green='\e[1;32m' 
+light_blue='\e[1;34m'
 NC='\e[0m' # No Color
 
 # Exaple of file projects.list
 # mempo/deterministic-kernel deterministic-kernel mempo:kernel:OFFICIAL test.sh 
-nconfig_file="projects.list" 
+config_file="projects.list" 
 if [[ ! -r "$config_file" ]] ; then 
 	echo -e "${light_red}Can not find config file: $config_file ${NC}"
 	exit 1
 fi;
-config_file=$(cat $nconfig_file | sed '/^$/d' | sed  '/^#/ d')
+
+echo -e "${light_blue}Starting irc bot ${NC}"
+./startirc.sh
 
 while true ;
 do
@@ -31,6 +34,6 @@ do
 	done < $config_file		
 
 	echo "Sleeping"
-	sleep 120
+	sleep 12
 	echo "Wake up"
 done
