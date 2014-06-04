@@ -13,7 +13,7 @@ light_blue='\e[1;34m'
 NC='\e[0m' # No Color
 
 arg_project_dir=$1 # mempo/deterministic-kernel
-arg_project_name=$2 # deterministic-kernel (the subdir with source code, usually the name from git clone)
+arg_project_name=$2 # deterministic-kernel (the subdir with source code, usually the name from git )
 arg_project_title=$3 # mempo:kernel:OFFICIAL mempo:kernel:rfree
 arg_project_afterUpdateScript=$4 
 
@@ -100,7 +100,7 @@ function after_update() {
 		echo -e "${yellow}Can not run $arg_project_afterUpdateScript ${NC}"
 	else 
 		echo -e "${light_blue}Starting $after_update_script ${NC}"
-		bash $after_update_script 
+		bash $after_update_script $1 $arg_project_dir
 	fi
 
 }
@@ -135,11 +135,11 @@ then
 		echo "Notify failed!"
 		allok=0
 	}
-	after_update
+	after_update $ver_now
 	rm -rf "$path_now"
 
 	if [[ $allok != 1 ]] ; then
-		echo "error"
+		echo "error with notifications"
 		exit 1
 	fi
 
