@@ -17,4 +17,4 @@ bash deterministic-kernel/run.sh
 #sha256sum deterministic-kernel/kernel-build/linux-mempo/*.sh
 sums=$(sha256sum deterministic-kernel/kernel-build/linux-mempo/*.deb)
 
-./notify.sh  $sums 
+#./notify.sh  $sums 
