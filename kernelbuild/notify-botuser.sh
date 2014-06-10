@@ -8,10 +8,10 @@ source messaging.conf
 ADDRESS=$KERNELBUILD_TO_BOTUSER/$FLAG_DIR 
 MESSAGE_CATEGORY=$1
 
-if [[ ! -r "$config_file" ]] ; then 
+if [[ ! -r "$MESSAGE" ]] ; then 
     echo -e "${light_red}Can not find message file: $MESSAGE ${NC}"
     exit 1
-fi; 
+fi 
 
 mv $MESSAGE $MESSAGE_CATEGORY 
 cp $MESSAGE_CATEGORY $ADDRESS 
