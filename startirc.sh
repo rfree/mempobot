@@ -12,7 +12,7 @@ sleep 10
 echo "done"
 sleep 2
 echo "Showing out"
-#cat "$BASEDIR/$HOST/out"
+#cat "$IRC_BASEDIR/$IRC_HOST/out"
 
 echo "All done"
 
