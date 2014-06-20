@@ -13,8 +13,8 @@ DATE=$(date +"%Y-%m-%d-%H-%M-%S")
 GIT_VER=$1 
 GIT_URL=$2
 
-function clear() { 
-    bash deterministic-kernel/cmd-clear.sh 
+function clear_build_dirs() { 
+    bash deterministic-kernel/cmd-clear.sh  # remove the heavy data (probably will leave behind logs and all)
     mv deterministic-kernel deterministic-kernel-$DATE 
 }
 
@@ -41,13 +41,17 @@ _PWD=$(pwd)
 cd deterministic-kernel/
 
 echo -e "${light_green}STARTING BUILD${NC}"
-/usr/bin/yes | ./run.sh 
+
+# /usr/bin/yes | ./run.sh  # XXX dryrun
+
 cd $_PWD
 
 echo -e "${light_blue}END OF BUILD${NC}"
 
+# TODO use test files or the real deb files?
 sums=$(sha256sum deterministic-kernel/kernel-build/linux-mempo/*.deb) 
-#sums=$(sha256sum deterministic-kernel/*.sh) 
+sums=$(sha256sum deterministic-kernel/*.sh)  # XXX dryrun
+
 echo "Checksums: $sums" 
 echo "Notifying"
 # if $sums aren't empty
@@ -58,4 +62,4 @@ else
     echo "Error! Can't find *.deb file. Build of kernel failed!" > $MESSAGE
     bash notify-botuser.sh "BUILDING_ERROR"
 fi
-clear
+clear_build_dirs

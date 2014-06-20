@@ -37,7 +37,8 @@ while true ; do
         break
     fi 
     echo -n "."
-    sleep 3    
+    # TODO abort+report error if over 100 iterations
+    sleep 1
 done  
 
 
@@ -62,11 +63,14 @@ while true ;  do
 
     echo -n "."
    
+   sleep 1
+   # TODO abort+report error if over 100 iterations
    #sleep 5m
 done
+
+# continue here if success
 
 sums=$(cat $FROM_KERNELBUILD/$FLAG_DIR/CHECKSUM*) 
 rm -f  $FROM_KERNELBUILD/$FLAG_DIR/CHECKSUM*
 ./notify.sh $sums 
-
 
