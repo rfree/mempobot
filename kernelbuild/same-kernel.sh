@@ -2,7 +2,7 @@ echo "-------------------------------------------"
 echo "The Mempo's version"
 echo "-------------------------------------------"
 
-source message.conf
+source ../messaging.conf
 
 DATE=$(date +"%Y-%m-%d-%H-%M-%S")
 GIT_VER=$1 
@@ -17,14 +17,14 @@ function clear() {
 
 
 # clean old builds 
-if [ -d "$DIRECTORY" ]; then
-    clear()
+if [[ -d  $DIRECTORY ]] ; then
+    clear
 fi
 
 #git clone $GIT_URL
 
 echo "Ready to build" > $MESSAGE 
-bash notify.sh ACCEPTED-$DATE
+bash notify.sh "ACCEPTED-$DATE"
 
 
 # TODO wchitch no $GIT_VER version
@@ -37,5 +37,9 @@ bash notify.sh ACCEPTED-$DATE
 #sha256sum deterministic-kernel/kernel-build/linux-mempo/*.sh
 #:
 sums=$(sha256sum deterministic-kernel/kernel-build/linux-mempo/*.deb) 
+echo "Build done: $sums" > $MESSAGE
+bash notify.sh "CHECKSUMS-$DATE"
 
-clear()
+
+
+clear

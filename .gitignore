@@ -4,3 +4,4 @@ bin
 *~
 test*
 messaging.conf
+message.tmp

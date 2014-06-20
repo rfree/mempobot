@@ -1,6 +1,6 @@
 #!/bin/bash	
 
-source messaging.conf 
+source ../messaging.conf 
 
 ORDERS=$FROM_BOTUSER/$FLAG_DIR/ORDER* 
 
@@ -13,6 +13,7 @@ do
     echo $GIT_VER 
     echo $GIT_URL
     echo -e "\n"
+    echo "Sarting script same-kernel.sh"
     bash same-kernel.sh $GIT_VER $GIT_URL
     #rm $o				
 done

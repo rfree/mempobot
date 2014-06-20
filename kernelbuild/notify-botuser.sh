@@ -3,7 +3,9 @@
 light_red='\e[1;31m' 
 NC='\e[0m' # No Color
 
-source messaging.conf 
+source ../messaging.conf 
+
+mkdir -p $KERNELBUILD_TO_BOTUSER/$FLAG_DIR 
 
 ADDRESS=$KERNELBUILD_TO_BOTUSER/$FLAG_DIR 
 MESSAGE_CATEGORY=$1
@@ -13,7 +15,11 @@ if [[ ! -r "$MESSAGE" ]] ; then
     exit 1
 fi 
 
-mv $MESSAGE $MESSAGE_CATEGORY 
-cp $MESSAGE_CATEGORY $ADDRESS 
-rm $MESSAGE_CATEGORY 
+DATE=$(date +"%Y-%m-%d-%H-%M-%S")
+MESSAGE_NAME="$MESSAGE_CATEGORY-$DATE" 
+
+
+mv $MESSAGE $MESSAGE_NAME
+cp $MESSAGE_NAME $ADDRESS/ 
+rm $MESSAGE_NAME
 
