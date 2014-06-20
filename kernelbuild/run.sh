@@ -24,13 +24,14 @@ do
         echo "Removing order" 
         rm -f $o
         echo -e "\n"
-        echo -e "${light_blue}Sarting script same-kernel.sh ${NC}"
+        echo -e "${light_blue}Starting script same-kernel.sh ${NC}"
         
-        if [[ ! -z "$GIT_VER" ]] && [[ ! -z  "$GIT_URL" ]]; then 
+        if [[ ! -z "$GIT_VER" ]]; then 
             bash same-kernel.sh $GIT_VER $GIT_URL 
         fi
     fi				
 done  
 echo -n "."
+rm -f  ACCEPT* ORDER* ERROR* CHECKSUM*
 sleep 20
 done

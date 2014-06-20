@@ -41,18 +41,21 @@ _PWD=$(pwd)
 cd deterministic-kernel/
 
 echo -e "${light_green}STARTING BUILD${NC}"
-/usr/bin/yes | ./run.sh 
+#/usr/bin/yes | ./run.sh 
 cd $_PWD
-#sha256sum deterministic-kernel/kernel-build/linux-mempo/*.sh
-#:
-sums=$(sha256sum deterministic-kernel/kernel-build/linux-mempo/*.deb) 
 
+echo -e "${light_blue}END OF BUILD${NC}"
+
+#sums=$(sha256sum deterministic-kernel/kernel-build/linux-mempo/*.deb) 
+sums=$(sha256sum deterministic-kernel/*.sh) 
+echo "Checksums: $sums" 
+echo "Notifying"
 # if $sums aren't empty
-if [[ ! -z "$VAR" ]]; then
+if [[ ! -z "$sums" ]]; then
     echo "$sums" > $MESSAGE
     bash notify-botuser.sh "CHECKSUMS"
 else 
-    echo "Error! Can't find *.deb file. Build of kernel failed!"
+    echo "Error! Can't find *.deb file. Build of kernel failed!" > $MESSAGE
     bash notify-botuser.sh "BUILDING_ERROR"
 fi
 clear
