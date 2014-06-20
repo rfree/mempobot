@@ -21,7 +21,16 @@ ORDER="ORDER-$ORDER_DATE"
 
 END_BUILD=""
 # preparing catalog for order
-mkdir -p $BOTUSER_TO_KERNELBUILD/$FLAG_DIR 
+
+# because mkdir -p was not preserving setfacl somehow...
+function makedir_maybe {
+	dir=$1
+	if [[ ! -d "$dir" ]] ; then
+		mkdir "$dir"
+	fi
+}
+makedir_maybe $BOTUSER_TO_KERNELBUILD/
+makedir_maybe $BOTUSER_TO_KERNELBUILD/$FLAG_DIR 
 
 # messaging to KERNELBUILD
 #echo "" > $BOTUSER_TO_KERNELBUILD/$FLAG_DIR/$ORDER 

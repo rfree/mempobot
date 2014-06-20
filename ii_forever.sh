@@ -1,4 +1,6 @@
 
+source "irc.conf"
+
 while true 
 do
 	echo "starting ii irc connection: " "$@"

@@ -1,2 +1,2 @@
 mempo/deterministic-kernel deterministic-kernel mempo:kernel:OFFICIAL to-build-flag.sh
-rfree/deterministic-kernel deterministic-kernel mempo:kernel:rfree 
+rfree/deterministic-kernel deterministic-kernel mempo:kernel:rfree to-build-flag.sh
