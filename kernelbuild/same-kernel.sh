@@ -41,13 +41,13 @@ _PWD=$(pwd)
 cd deterministic-kernel/
 
 echo -e "${light_green}STARTING BUILD${NC}"
-#/usr/bin/yes | ./run.sh 
+/usr/bin/yes | ./run.sh 
 cd $_PWD
 
 echo -e "${light_blue}END OF BUILD${NC}"
 
-#sums=$(sha256sum deterministic-kernel/kernel-build/linux-mempo/*.deb) 
-sums=$(sha256sum deterministic-kernel/*.sh) 
+sums=$(sha256sum deterministic-kernel/kernel-build/linux-mempo/*.deb) 
+#sums=$(sha256sum deterministic-kernel/*.sh) 
 echo "Checksums: $sums" 
 echo "Notifying"
 # if $sums aren't empty
