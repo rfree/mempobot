@@ -12,7 +12,7 @@ echo "/JOIN #mempo" > "$BASEDIR/$HOST/in"
 echo "done"
 sleep 2
 echo "Showing out"
-cat "$BASEDIR/$HOST/out"
+#cat "$BASEDIR/$HOST/out"
 
 echo "All done"
 
