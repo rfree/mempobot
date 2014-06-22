@@ -6,6 +6,8 @@ light_green='\e[1;32m'
 light_blue='\e[1;34m'
 NC='\e[0m' # No Color
 
+source options.conf
+
 # Exaple of file projects.list
 # mempo/deterministic-kernel deterministic-kernel mempo:kernel:OFFICIAL test.sh 
 config_file="projects.list" 
@@ -19,7 +21,9 @@ echo -e "${light_blue}Starting irc bot ${NC}"
 
 while true ;
 do
-	# Reading data from config file
+	source options.conf # <-- reload the options config
+
+	# Reading data from config file (reload each time too)
 	while read line 
 	do 
 		arg_project_dir=$(echo "$line" |  awk '{ print $1 }')  # mempo/deterministic-kernel 
@@ -34,6 +38,6 @@ do
 	done < $config_file		
 
 	echo "Sleeping"
-	sleep 12
+	sleep OPT_GIT_SLEEP_TIME
 	echo "Wake up"
 done
