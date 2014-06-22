@@ -23,6 +23,7 @@ function writedata() {
 		die "Can not read msg_file [$msg_file]"
 	fi
 
+	echo ""
 	echo "=====================================================================" 
 	printf -- '%s\n' "From: bot_mempo"
 	printf -- '%s\n' "Newsgroups: $groups"

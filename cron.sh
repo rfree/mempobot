@@ -117,7 +117,7 @@ then
 	echo "Working on reporting event $path_now" > "$path_now/log.txt"
 
 	git_name=$( output_repo_url )
-	echo "git_name=$git_name"
+	echo "git_name=$git_name" # get and show the nice short name of github.com/repo thing
 
 	echo "" > "$path_now/log.txt"
 	echo "Reporting update in GIT repository $git_name" >> "$path_now/log.txt"
@@ -135,21 +135,24 @@ then
 		echo "Notify failed!"
 		allok=0
 	}
-	after_update $ver_now
-	rm -rf "$path_now"
-
 	if [[ $allok != 1 ]] ; then
-		echo "error with notifications"
+		echo "error while sending notifications, will abort here"
 		exit 1
 	fi
+
+	allok=1
+	after_update $ver_now || {
+		echo "Error in doing after_update for $ver_now"
+		allok=0
+	}
+
+	rm -rf "$path_now"
 
 
 	echo "Saving current version"
 	echo "$ver_now" > "$cfg_path_info/lastversion"
 	echo "Now last version is:"
 	cat "$cfg_path_info/lastversion"
-	
-	
 	
 
 # old version
