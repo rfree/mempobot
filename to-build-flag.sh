@@ -38,7 +38,8 @@ makedir_maybe $BOTUSER_TO_KERNELBUILD/$FLAG_DIR
 #echo $GIT_URL >> $BOTUSER_TO_KERNELBUILD/$FLAG_DIR/$ORDER 
 echo "Sending order for kernelbuild"
 echo -e "$GIT_VER \n$GIT_URL" > $BOTUSER_TO_KERNELBUILD/$FLAG_DIR/$ORDER 
-echo "Waiting for reply"
+
+echo "Waiting for reply from the build-bot"
 
 while true ; do
     if ls $FROM_KERNELBUILD/$FLAG_DIR/ACCEPTED*  &> /dev/null ; then
@@ -49,6 +50,7 @@ while true ; do
     # TODO abort+report error if over 100 iterations
     sleep 1
 done  
+echo "Got reply from the build-bot"
 
 
 echo "Removing all ACCEPTED flags"

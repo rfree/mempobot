@@ -38,6 +38,7 @@ do
 	done < $config_file		
 
 	echo "Sleeping"
-	sleep OPT_GIT_SLEEP_TIME
+	sleep $OPT_GIT_SLEEP_TIME
+	sleep 1
 	echo "Wake up"
 done
