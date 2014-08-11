@@ -8,7 +8,10 @@ It can report any project
 It can run a build script and is now specialized for the mempo kernel (SameKernel) builds.
 
 
-INSTALL
+==== INSTALL ====
+
+=== kernelbuild ===
+
 
 As user kernelbuild
 On the kernelbuild side, download git as:
@@ -39,5 +42,26 @@ lrwxrwxrwx  1 kernelbuild kernelbuild   83 Aug 11 09:03 samekernel-rfree.sh -> /
 Install crontab:
 run "crontab -e" and add line:
 @reboot /home/kernelbuild/go.sh
+
+=== botmempo ===
+
+As user "botmempo"
+
+Get git sources e.g.:
+
+botmempo@tesla:~/mempobot$ git remote -v
+origin  git@github.com:mempomisc/mempobot.git (fetch)
+
+Link scripts like:
+
+botmempo@tesla:~$ ls -l
+total 24848
+lrwxrwxrwx 1 botmempo botmempo       51 Aug 11 09:08 go2.sh -> /home/botmempo/mempobot/mempo-tools/botmempo/go2.sh
+lrwxrwxrwx 1 botmempo botmempo       50 Aug 11 09:08 go.sh -> /home/botmempo/mempobot/mempo-tools/botmempo/go.sh
+drwxr-xr-x 9 botmempo botmempo     4096 Aug 11 09:07 mempobot
+
+add to "crontab -e" the line:
+@reboot /home/botmempo/go.sh
+
 
 
