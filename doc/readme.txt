@@ -36,4 +36,8 @@ lrwxrwxrwx  1 kernelbuild kernelbuild   22 Apr 25 15:19 publish -> /home/kernelb
 lrwxrwxrwx  1 kernelbuild kernelbuild   83 Aug 11 09:03 samekernel-mempo.sh -> /home/kernelbuild/bot_to_build/mempobot/mempo-tools/kernelbuild/samekernel-mempo.sh
 lrwxrwxrwx  1 kernelbuild kernelbuild   83 Aug 11 09:03 samekernel-rfree.sh -> /home/kernelbuild/bot_to_build/mempobot/mempo-tools/kernelbuild/samekernel-rfree.sh
 
+Install crontab:
+run "crontab -e" and add line:
+@reboot /home/kernelbuild/go.sh
+
 
