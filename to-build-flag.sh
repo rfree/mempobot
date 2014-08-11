@@ -83,5 +83,5 @@ done
 
 sums=$(cat $FROM_KERNELBUILD/$FLAG_DIR/CHECKSUM*) 
 rm -f  $FROM_KERNELBUILD/$FLAG_DIR/CHECKSUM*
-./notify.sh $sums 
+./notify.sh "build $GIT_VER $GIT_URL: $sums"
 
