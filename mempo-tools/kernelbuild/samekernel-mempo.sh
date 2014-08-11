@@ -1,9 +1,3 @@
-
-
-echo "-------------------------------------------"
-echo "The Mempo's version"
-echo "-------------------------------------------"
-
 cd ~
 rm -rf deterministic-kernel/
 git clone https://github.com/mempo/deterministic-kernel.git
