@@ -11,6 +11,11 @@ GIT_VER=""
 GIT_URL="" 
 
 
+echo "Orders are (on start): "
+echo "$ORDERS"
+ls -l $ORDERS
+echo 
+
 do
 for o in $ORDERS
 do
@@ -19,8 +24,7 @@ do
     # take action on each file. $f store current file name
         GIT_VER=$(head  $o -n 1) 
         GIT_URL=$(tail  $o -n 1) 
-        echo $GIT_VER 
-        echo $GIT_URL
+	echo "Got order: VER=$GIT_VER  URL=$GIT_URL"
         echo "Removing order" 
         rm -f $o
         echo -e "\n"
