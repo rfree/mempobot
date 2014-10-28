@@ -1,0 +1,6 @@
+gpg: Signature made Tue 28 Oct 2014 03:17:32 CET using RSA key ID 45953F23
+gpg: checking the trustdb
+gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
+gpg: depth: 0  valid:   6  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 6u
+gpg: next trustdb check due at 2015-08-21
+gpg: Good signature from "rfree-mempo (rfree for signing things in mempo, for now. low-medium security currently) <rfree@i2pmail.org>"
