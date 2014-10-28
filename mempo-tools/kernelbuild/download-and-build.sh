@@ -34,7 +34,8 @@ echo "Ok starting build script:"
 echo "Build process finished, will now publish"
 mkdir -p ~/publish/
 
-cp -v deterministic-kernel/kernel-build/linux-mempo/*deb ~/publish/ && echo "Copied the files" 
+# we are in deterministic-kernel/
+cp -v kernel-build/linux-mempo/*deb ~/publish/ && echo "Copied the files" 
 
 echo
 echo
