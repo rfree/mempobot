@@ -31,15 +31,38 @@ int execute_check_validity() {
 	return 0;
 }
 
+void usage() {
+	cout << "The program checks output of gpg tag -v command and confirms if GPG was reported as valid or not" << endl;
+	cout << "The program sets proper exit-code so can be used for scripting / batch processing" << endl;
+	cout << "Start program with option:" << endl;
+	cout << "  -h this help text" << endl;
+	cout << "  -c check validity. will return 0 exit-code if valid, else non-zero. Use as: gpg -v sometag | thisprogram -c" << endl;
+	cout << "" << endl;
+}
+
 int main_(string program_name, vector<string> args) {
 	typedef enum { execute_check_validity_enum, execute_none_enum, execute_help_enum } execute_type;
 	execute_type execute = execute_none_enum;
 
-	cout << "program " << program_name << endl;
+	//cout << "program " << program_name << endl;
 
-	if (args.size()>0) cout << "arg0 = " << args.at(0) << endl;
+	if (args.size()>0) {
+		const string mode = args.at(0);
+		if (mode == "-c") execute = execute_check_validity_enum;
+		if (mode == "-h") execute = execute_help_enum;
+	}
 
+	switch (execute) {
+		case execute_none_enum:
+		case execute_help_enum:
+		usage();
+		break;
 
+		case execute_check_validity_enum:
+		return execute_check_validity();
+	}
+
+	return 2;
 }
 
 
