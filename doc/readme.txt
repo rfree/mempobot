@@ -1,4 +1,8 @@
 
+See also top-level README.txt for the status (what works and what does not work).
+LINK: update the said README.txt file status.
+
+
 This is the bot that will build, report etc on git projects;
 
 It can report any project
