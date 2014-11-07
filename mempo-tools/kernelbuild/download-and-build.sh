@@ -19,7 +19,9 @@ gpg_was_ok=nope
 git_tag=$( git describe --tags )
 echo "This is git tag: $git_tag"
 echo "Will verify this tag:"
+set -x
 ( LANG=C git tag -v $git_tag 3>&1 1>&2- 2>&3- ) | git-gpg-check -c && { echo GPG_OK ; gpg_was_ok="yes" ; } || { echo GPG_CHECK_FAILED ; echo "GPG check failed, make sure you have the GPG key and you trust it" ; exit 50 ; }
+set +x
 
 if [[ "x$gpg_was_ok" == "xyes" ]] ; then
 	echo "GPG verified, ok"

@@ -34,6 +34,9 @@ int execute_check_validity() {
 void usage() {
 	cout << "The program checks output of gpg tag -v command and confirms if GPG was reported as valid or not" << endl;
 	cout << "The program sets proper exit-code so can be used for scripting / batch processing" << endl;
+	cout << "  ***WARNING***    remember to use LC_ALL=\"C\" when using the gpg to obtain the output, \n"
+	     << "  because the output is parsed as standard English language text with certain words in it" << endl;
+	cout << endl;
 	cout << "Start program with option:" << endl;
 	cout << "  -h this help text" << endl;
 	cout << "  -c check validity. will return 0 exit-code if valid, else non-zero. Use as: gpg -v sometag | thisprogram -c" << endl;
