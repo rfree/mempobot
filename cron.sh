@@ -5,9 +5,19 @@
 # var/PROJ/mempo/deterministic-kernel/deterministic-kernel/deterministic-kernel = git sources 
 # var/PROJ/mempo/deterministic-kernel/deterministic-kernel/info/ = dir with info
 
+# bin/ after update scripts to projects 
+
+light_red='\e[1;31m' 
+yellow='\e[1;33m'  
+light_blue='\e[1;34m'
+NC='\e[0m' # No Color
+
 arg_project_dir=$1 # mempo/deterministic-kernel
-arg_project_name=$2 # deterministic-kernel (the subdir with source code, usually the name from git clone)
+arg_project_name=$2 # deterministic-kernel (the subdir with source code, usually the name from git )
 arg_project_title=$3 # mempo:kernel:OFFICIAL mempo:kernel:rfree
+arg_project_afterUpdateScript=$4 
+
+after_update_script=$arg_project_afterUpdateScript
 
 # TODO assert $arg_project_dir does not end in / and is dir
 
@@ -16,11 +26,14 @@ cfg_path_info="var/PROJ/$arg_project_dir/info"
 cfg_file_verold="$cfg_path_info/lastversion" 
 
 if [[ ! -d "$cfg_path_git" ]] ; then # does the dir exist with checked out git
-	echo "Can not enter $cfg_path_git"
-	echo "You need to configure this program:"
-	echo "Create that directory by (mkdir -p var/..) and by checking out there the git source code of the project to be monitored"
-	echo "And then try again. Questions: #mempo on i2p or oftc or freenode (and wait up to 48 hours)"
-	exit 1
+	echo -e "${light_red}Can not enter $cfg_path_git ${NC} "
+	echo "Press ENTER to autoconfigure or Ctrl-C to abort" 
+	read _ 
+	read _
+	bash create-dir.sh $arg_project_dir	$arg_project_name
+	#echo "Create that directory by (mkdir -p var/..) and by checking out there the git source code of the project to be monitored"
+	#echo "And then try again. Questions: #mempo on i2p or oftc or freenode (and wait up to 48 hours)"
+	#exit 1
 fi;
 
 if [[ ! -r "$cfg_file_verold" ]] ; then # read old version
@@ -80,8 +93,19 @@ function output_repo_url_raw() {
 function output_repo_url() {
 	name=$(output_repo_url_raw)
 	echo "$name" | sed -e 's/http[s]*:\/\///g'
+} 
+
+function after_update() { 
+	if [[ ! -x $after_update_script ]] ; then 
+		echo -e "${yellow}Can not run $arg_project_afterUpdateScript ${NC}"
+	else 
+		echo -e "${light_blue}Starting $after_update_script ${NC}"
+		bash $after_update_script $1 $arg_project_dir
+	fi
+
 }
 
+# New verion!! 
 if [[ "$ver_old" != "$ver_now" ]] 
 then
 
@@ -93,7 +117,7 @@ then
 	echo "Working on reporting event $path_now" > "$path_now/log.txt"
 
 	git_name=$( output_repo_url )
-	echo "git_name=$git_name"
+	echo "git_name=$git_name" # get and show the nice short name of github.com/repo thing
 
 	echo "" > "$path_now/log.txt"
 	echo "Reporting update in GIT repository $git_name" >> "$path_now/log.txt"
@@ -111,19 +135,27 @@ then
 		echo "Notify failed!"
 		allok=0
 	}
-
-	rm -rf "$path_now"
-
 	if [[ $allok != 1 ]] ; then
-		echo "error"
+		echo "error while sending notifications, will abort here"
 		exit 1
 	fi
+
+	allok=1
+	after_update $ver_now || {
+		echo "Error in doing after_update for $ver_now"
+		allok=0
+	}
+
+	rm -rf "$path_now"
 
 
 	echo "Saving current version"
 	echo "$ver_now" > "$cfg_path_info/lastversion"
 	echo "Now last version is:"
 	cat "$cfg_path_info/lastversion"
+	
+
+# old version
 else
 	echo "Same versions, nothing to do"
 fi

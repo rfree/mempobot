@@ -1,6 +1,16 @@
-#!/bin/bash -e
-./send_nttp_fms.sh "$@" || { echo "FMS failed!" ; exit 2; }
+#!/bin/bash -e 
 
-echo "$1" > "./var/link/127.0.0.1/#mempo/in" & 
+arg_title=$1
+arg_msgfile=$2
 
+# startirc.sh must be executed first
+
+# irc  
+pwd
+source irc.conf
+
+echo "$arg_title" > "$IRC_BASEDIR/$IRC_HOST/#mempo/in" & 
+
+# FMS 
+./send_nttp_fms.sh "$arg_title" "$arg_msgfile" || { echo "NTTP FMS failed!" ; exit 2; }
 

@@ -1,2 +1,10 @@
 var
 nohup.out
+bin
+*~
+test*
+messaging.conf
+message.tmp
+ACCEPTED*
+deterministic-kernel*
+kernel-sources*

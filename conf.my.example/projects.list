@@ -1,0 +1,2 @@
+mempo/deterministic-kernel deterministic-kernel mempo:kernel:OFFICIAL same-kernel.sh
+rfree/deterministic-kernel deterministic-kernel mempo:kernel:rfree 
