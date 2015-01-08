@@ -1,0 +1,5 @@
+gpg: Signature made Tue 28 Oct 2014 03:17:32 CET using RSA key ID 45953F23
+gpg: Good signature from "rfree-mempo (rfree for signing things in mempo, for now. low-medium security currently) <rfree@i2pmail.org>"
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 21A5 9D31 7421 F02E C3C3  81F3 4623 E8F7 4595 3F23

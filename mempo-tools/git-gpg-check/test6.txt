@@ -1,0 +1,2 @@
+gpg: Signature made Tue 28 Oct 2014 03:17:32 CET using RSA key ID 45953F23
+gpg: Good signature from "rfree-mempo (rfree for signing things in mempo, for now. low-medium security currently) <rfree@i2pmail.org>"
